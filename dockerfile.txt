@@ -1,0 +1,237 @@
+SECURE SOFTWARE DESIGN & DEVELOPMENT – QUICK CHEAT SHEET
+
+# DOCKER
+
+Install:
+sudo apt install docker.io -y
+
+Start:
+sudo systemctl start docker
+
+Enable:
+sudo systemctl enable docker
+
+Version:
+docker --version
+
+Images:
+docker images
+
+Running Containers:
+docker ps
+
+All Containers:
+docker ps -a
+
+Pull Image:
+docker pull ubuntu
+
+Run Container:
+docker run ubuntu
+
+Interactive Container:
+docker run -it ubuntu bash
+
+Stop Container:
+docker stop CONTAINER_ID
+
+Delete Container:
+docker rm CONTAINER_ID
+
+Delete Image:
+docker rmi IMAGE_ID
+
+Build Image:
+docker build -t myapp .
+
+Run Image:
+docker run myapp
+
+# DOCKERFILE
+
+FROM ubuntu
+
+RUN apt update
+
+CMD ["echo","Hello World"]
+
+FROM = Base Image
+RUN = Execute During Build
+CMD = Execute When Container Starts
+
+# JENKINS
+
+Start:
+sudo systemctl start jenkins
+
+Status:
+sudo systemctl status jenkins
+
+Enable:
+sudo systemctl enable jenkins
+
+Initial Password:
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+Default Port:
+8080
+
+URL:
+http://localhost:8080
+
+# CI/CD FLOW
+
+Developer
+|
+GitHub
+|
+Jenkins
+|
+Build
+|
+Test
+|
+Deploy
+
+# PIPELINE
+
+pipeline {
+agent any
+
+```
+stages {
+
+    stage('Build') {
+        steps {
+            echo 'Building'
+        }
+    }
+
+    stage('Test') {
+        steps {
+            echo 'Testing'
+        }
+    }
+
+    stage('Deploy') {
+        steps {
+            echo 'Deploying'
+        }
+    }
+}
+```
+
+}
+
+# GITHUB CLONE
+
+pipeline {
+agent any
+
+```
+stages {
+    stage('Clone') {
+        steps {
+            git url: 'https://github.com/user/repo.git'
+        }
+    }
+}
+```
+
+}
+
+# CRON JOBS
+
+Every Minute:
+
+---
+
+Every 5 Minutes:
+*/5 * * * *
+
+Every Hour:
+0 * * * *
+
+Every Day:
+0 0 * * *
+
+Every Monday:
+0 9 * * 1
+
+# DFD
+
+Rectangle = External Entity
+Circle = Process
+Arrow = Data Flow
+Data Store = Database
+
+Purpose:
+Shows movement of data.
+
+# USE CASE DIAGRAM
+
+Actor = User/Admin
+Oval = Use Case
+Rectangle = System Boundary
+
+Purpose:
+Shows interaction between user and system.
+
+# SEQUENCE DIAGRAM
+
+Actor
+|
+System
+|
+Database
+
+Purpose:
+Shows message flow over time.
+
+Time Direction:
+Top → Bottom
+
+# STATE CHART
+
+State ---> Transition ---> State
+
+Example:
+
+Idle
+|
+Insert Card
+|
+Authentication
+|
+Transaction
+|
+Idle
+
+Purpose:
+Shows state changes.
+
+# IMPORTANT DIFFERENCES
+
+DFD:
+Data Flow
+
+Use Case:
+User Interaction
+
+Sequence:
+Message Flow Over Time
+
+State Chart:
+State Changes
+
+Docker:
+Container Platform
+
+Jenkins:
+CI/CD Automation Tool
+
+Image:
+Template
+
+Container:
+Running Instance of Image
