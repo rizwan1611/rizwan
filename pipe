@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Clone Repo') {
+            steps {
+                git branch: 'main',
+                url: 'https://github.com/USERNAME/REPO.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Repository cloned successfully'
+            }
+        }
+    }
+}
