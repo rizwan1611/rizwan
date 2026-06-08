@@ -1,0 +1,348 @@
+DOCKER & JENKINS LAB CHEAT SHEET
+
+========================================
+DOCKER INSTALLATION (KALI/UBUNTU)
+=================================
+
+sudo apt update
+sudo apt upgrade -y
+sudo apt install docker.io -y
+
+Start Docker:
+sudo systemctl start docker
+
+Enable Docker at boot:
+sudo systemctl enable docker
+
+Check Docker status:
+sudo systemctl status docker
+
+Check Docker version:
+docker --version
+
+========================================
+DOCKER BASIC COMMANDS
+=====================
+
+List images:
+docker images
+
+List running containers:
+docker ps
+
+List all containers:
+docker ps -a
+
+Download image:
+docker pull ubuntu
+
+Run container:
+docker run ubuntu
+
+Interactive container:
+docker run -it ubuntu bash
+
+Run hello world:
+docker run hello-world
+
+Run container in background:
+docker run -d nginx
+
+Stop container:
+docker stop CONTAINER_ID
+
+Start container:
+docker start CONTAINER_ID
+
+Restart container:
+docker restart CONTAINER_ID
+
+Delete container:
+docker rm CONTAINER_ID
+
+Delete image:
+docker rmi IMAGE_ID
+
+View logs:
+docker logs CONTAINER_ID
+
+Container details:
+docker inspect CONTAINER_ID
+
+Execute command inside container:
+docker exec -it CONTAINER_ID bash
+
+========================================
+DOCKERFILE EXAMPLES
+===================
+
+Example 1:
+
+FROM ubuntu
+
+RUN apt update
+
+CMD ["echo","Hello World"]
+
+Build:
+docker build -t myapp .
+
+Run:
+docker run myapp
+
+---
+
+Example 2:
+
+FROM nginx
+
+COPY . /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx","-g","daemon off;"]
+
+========================================
+DOCKER NETWORK COMMANDS
+=======================
+
+List networks:
+docker network ls
+
+Create network:
+docker network create mynetwork
+
+Inspect network:
+docker network inspect mynetwork
+
+========================================
+DOCKER VOLUME COMMANDS
+======================
+
+Create volume:
+docker volume create myvolume
+
+List volumes:
+docker volume ls
+
+Inspect volume:
+docker volume inspect myvolume
+
+========================================
+JENKINS INSTALLATION (KALI LINUX)
+=================================
+
+Install Java:
+sudo apt install openjdk-17-jdk -y
+
+Check Java:
+java -version
+
+Add Jenkins Key:
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+Add Repository:
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+Update:
+sudo apt update
+
+Install Jenkins:
+sudo apt install jenkins -y
+
+Start Jenkins:
+sudo systemctl start jenkins
+
+Enable Jenkins:
+sudo systemctl enable jenkins
+
+Check Status:
+sudo systemctl status jenkins
+
+Get Initial Password:
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+Open Browser:
+http://localhost:8080
+
+========================================
+JENKINS PIPELINE EXAMPLES
+=========================
+
+Pipeline 1:
+
+pipeline {
+agent any
+
+```
+stages {
+
+    stage('Build') {
+        steps {
+            echo 'Building Project'
+        }
+    }
+
+    stage('Test') {
+        steps {
+            echo 'Testing Project'
+        }
+    }
+
+    stage('Deploy') {
+        steps {
+            echo 'Deploying Project'
+        }
+    }
+
+}
+```
+
+}
+
+========================================
+RUN DOCKER FROM JENKINS
+=======================
+
+pipeline {
+agent any
+
+```
+stages {
+
+    stage('Docker Version') {
+        steps {
+            sh 'docker --version'
+        }
+    }
+
+}
+```
+
+}
+
+========================================
+RUN HELLO WORLD CONTAINER
+=========================
+
+pipeline {
+agent any
+
+```
+stages {
+
+    stage('Run Docker') {
+        steps {
+            sh 'docker run hello-world'
+        }
+    }
+
+}
+```
+
+}
+
+========================================
+BUILD DOCKER IMAGE FROM JENKINS
+===============================
+
+pipeline {
+agent any
+
+```
+stages {
+
+    stage('Build Image') {
+        steps {
+            sh 'docker build -t myapp .'
+        }
+    }
+
+}
+```
+
+}
+
+========================================
+RUN DOCKER CONTAINER FROM JENKINS
+=================================
+
+pipeline {
+agent any
+
+```
+stages {
+
+    stage('Run Container') {
+        steps {
+            sh 'docker run -d -p 8080:80 nginx'
+        }
+    }
+
+}
+```
+
+}
+
+========================================
+SSH COMMANDS
+============
+
+Install SSH:
+sudo apt install openssh-server -y
+
+Start SSH:
+sudo systemctl start ssh
+
+Enable SSH:
+sudo systemctl enable ssh
+
+Check SSH:
+sudo systemctl status ssh
+
+Find IP:
+ip a
+
+Connect:
+ssh username@IP_ADDRESS
+
+========================================
+IMPORTANT VIVA QUESTIONS
+========================
+
+What is Docker?
+
+* A platform for creating and running containers.
+
+What is a Container?
+
+* A lightweight isolated environment for applications.
+
+What is an Image?
+
+* A template used to create containers.
+
+What is Dockerfile?
+
+* A file containing instructions to build an image.
+
+What is Jenkins?
+
+* An automation server used for CI/CD.
+
+What is CI?
+
+* Continuous Integration.
+
+What is CD?
+
+* Continuous Delivery/Deployment.
+
+Default Jenkins Port?
+
+* 8080
+
+Docker vs VM?
+
+* Docker is lightweight and shares the host OS.
+* VM has a complete guest OS and uses more resources.
