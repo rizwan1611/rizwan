@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Build on Kali') {
+            steps {
+                bat 'ssh kaliuser@192.168.1.10 "cd /home/kali/project && docker build -t myapp ."'
+            }
+        }
+
+        stage('Run on Kali') {
+            steps {
+                bat 'ssh kaliuser@192.168.1.10 "docker run --rm myapp"'
+            }
+        }
+    }
+}
